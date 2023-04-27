@@ -34,6 +34,7 @@ const CardComic = ({ comic, clickAction, text }: props) => {
 
       <div>
         <Dialog
+
           open={isOpenDialog}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
@@ -47,7 +48,7 @@ const CardComic = ({ comic, clickAction, text }: props) => {
           <div className="teste">
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                {comic.description}
+                <p dangerouslySetInnerHTML={{__html:comic.description}}/>
                 <img className="img-quadro"
                   src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                   alt={comic.title}
@@ -66,29 +67,47 @@ const CardComic = ({ comic, clickAction, text }: props) => {
   }
 
   return (
-
-    <Card sx={{ maxWidth: 200 }}>
-      <CardMedia
-        component="img"
-        // height="200"
-        image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+    <div className='comic-card'>
+      <img 
+      src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
         alt={comic.title}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {comic.title}
-        </Typography>
-
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={() => { setIsOpenDialog(true) }}>Exibir Detalhes</Button>
-
-        {/* Botão para enviar para a lista (carrinho) */}
-        <Button size="small" onClick={() => {
-          clickAction()
+        />
+      <span>
+        {comic.title}
+      </span> 
+      <div className='card-comic-buttons'>
+      <Button size="small" onClick={() => { setIsOpenDialog(true) }}>Exibir Detalhes</Button>
+      <Button size="small" onClick={() => {
+        clickAction()
         }}>{text}</Button>
-      </CardActions>
-    </Card>
+      </div> 
+    </div>
+
+    // <Card >
+    //   <CardMedia
+    //     style={{
+    //       minWidth:"15rem"
+    //     }}
+    //     component="img"
+    //     // height="200"
+    //     image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+    //     alt={comic.title}
+    //   />
+    //   <CardContent>
+    //     <Typography gutterBottom variant="h5" component="div">
+    //       {comic.title}
+    //     </Typography>
+
+    //   </CardContent>
+    //   <CardActions>
+    //     <Button size="small" onClick={() => { setIsOpenDialog(true) }}>Exibir Detalhes</Button>
+
+    //     {/* Botão para enviar para a lista (carrinho) */}
+    //     <Button size="small" onClick={() => {
+    //       clickAction()
+    //     }}>{text}</Button>
+    //   </CardActions>
+    // </Card>
 
   );
 }

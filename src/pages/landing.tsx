@@ -1,7 +1,7 @@
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlusCircle, FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { api } from '../api/marvel';
@@ -13,17 +13,23 @@ import '../landing.css';
 
 
 export default function Landing() {
-    const QUANTITY_PER_PAGE = 4;
+    const QUANTITY_PER_PAGE = 10;
     const [query, setQuery] = useState<string>('');
     const [comics, setComics] = useState<IComic[]>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const { addCart } = useCart();
 
+    useEffect(()=>{
+        search("");
+    },[])
     async function search(value: string) {
         setIsLoading(true)
+        let url=`comics?ts=1&apikey=${process.env.REACT_APP_KEY}&hash=${process.env.REACT_APP_HASH}`
+        if (value!="")
+            url+=`&titleStartsWith=${value}`
         try {
-            const { data } = await api.get(`comics?titleStartsWith=${value}&ts=1&apikey=${process.env.REACT_APP_KEY}&hash=${process.env.REACT_APP_HASH}`)
+            const { data } = await api.get(url)
             setComics(data.data.results);
             setPage(1);
         } catch {
@@ -72,17 +78,18 @@ export default function Landing() {
                     isLoading && <div>Carregando...</div>
                 }
 
-
-                <Grid container spacing={2} className="list-comics">
+{/* igual esse */}
+                <div className="list-comics">
                     {
                         comics?.slice(0, page * QUANTITY_PER_PAGE).map(element =>
-                            <Grid item xs={3} key={element.id}>
+                            // <Grid item xs={3} key={element.id}>
                                 <CardComic comic={element} clickAction={() => {
                                     addCart(element)
                                 }} text="Adicionar a lista" />
-                            </Grid>)
+                            // </Grid>)
+                        )
                     }
-                </Grid>
+                </div>
                 {
                     comics && <Button
                         className="mais"
