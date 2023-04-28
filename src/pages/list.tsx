@@ -30,19 +30,18 @@ export default function List() {
                         Voltar
                     </Button>
                 </Link>
-{/* ajeitar aqui */}
-                {/* <Grid container spacing={2} className="list-comics"> */}
+
+                
                 <div className="list-comics-list">
                     {
                         comicsCart?.slice(0, page * QUANTITY_PER_PAGE).map(element =>
-                            // <Grid item xs={3} key={element.id}>
+                    
                                 <CardComic comic={element} clickAction={() => {
                                     removeCart(element.id)
                                 }} text="Remover da lista" />
-                            // {/* </Grid>) */}
+                      
                         )
                     }
-                {/* // </Grid> */}
                 </div>
                 {
                     comicsCart.length > 0 ? <Button

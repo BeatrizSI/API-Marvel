@@ -26,6 +26,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
@@ -115,6 +116,7 @@ article {
   text-align: center;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
+  
 }
 
 @media only screen and (min-width: 300px) {
@@ -168,6 +170,7 @@ article {
 .minha-list{
   margin-left: 30px !important;
   margin-top: 40px !important;
+  
 }
 
 .mais{

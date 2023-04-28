@@ -78,15 +78,14 @@ export default function Landing() {
                     isLoading && <div>Carregando...</div>
                 }
 
-{/* igual esse */}
                 <div className="list-comics">
                     {
                         comics?.slice(0, page * QUANTITY_PER_PAGE).map(element =>
-                            // <Grid item xs={3} key={element.id}>
+                            
                                 <CardComic comic={element} clickAction={() => {
                                     addCart(element)
                                 }} text="Adicionar a lista" />
-                            // </Grid>)
+  
                         )
                     }
                 </div>
