@@ -12,7 +12,7 @@ import '../landing.css';
 export default function List() {
 
     const { comicsCart, removeCart } = useCart();
-    const QUANTITY_PER_PAGE = 4;
+    const QUANTITY_PER_PAGE = 10;
     const [page, setPage] = useState<number>(1);
 
     return (
@@ -32,7 +32,7 @@ export default function List() {
                 </Link>
 {/* ajeitar aqui */}
                 {/* <Grid container spacing={2} className="list-comics"> */}
-                <div className="list-comics">
+                <div className="list-comics-list">
                     {
                         comicsCart?.slice(0, page * QUANTITY_PER_PAGE).map(element =>
                             // <Grid item xs={3} key={element.id}>
